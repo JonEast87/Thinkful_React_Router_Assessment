@@ -5,7 +5,7 @@ export const NotFound = () => (
 	<main className='container'>
 		<p>Page not found!</p>
 		<p>
-			<Link to='/'>Return Home</Link>
+			<Link to={'/'}>Return Home</Link>
 		</p>
 	</main>
 )
