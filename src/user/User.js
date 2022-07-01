@@ -9,8 +9,8 @@ import { Link, useParams, useRouteMatch, Route, Switch } from 'react-router-dom'
 export const User = () => {
 	const [user, setUser] = useState({ posts: [] })
 	const [error, setError] = useState(undefined)
-	const { userId } = useParams() // TODO: This ID will need to be pulled from parameters.
-	const { url } = useRouteMatch()
+	const { userId } = useParams()
+	const { path, url } = useRouteMatch()
 
 	useEffect(() => {
 		const abortController = new AbortController()
@@ -21,29 +21,16 @@ export const User = () => {
 		return () => abortController.abort()
 	}, [userId])
 
-	// TODO: Change the link below to go back to the home page.
-
 	if (error) {
 		return (
 			<ErrorMessage error={error}>
 				<p>
-					<a>Return Home</a>
+					<Link to='/'>Return Home</Link>
 				</p>
 			</ErrorMessage>
 		)
 	}
 
-	/*
-    TODO: In the below section, update the links to work appropriately with React Router.
-
-    TODO: You'll need to add nested routes below.
-
-    The <PostList /> component should show on the following route:
-    /users/:userId/posts
-
-    The <UserProfile /> component should show on the following route:
-    /users/:userId
-  */
 	return (
 		<section className='container'>
 			<PostsNav />
@@ -65,10 +52,10 @@ export const User = () => {
 				{user.id ? (
 					<div className='p-4 border border-top-0'>
 						<Switch>
-							<Route path={`${url}/posts`}>
+							<Route path={`${path}/posts`}>
 								<PostList posts={user.posts} />
 							</Route>
-							<Route path={`${url}/`}>
+							<Route path={`${path}/`}>
 								<UserProfile user={user} />
 							</Route>
 						</Switch>

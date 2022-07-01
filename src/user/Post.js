@@ -5,7 +5,7 @@ import { deletePost } from '../api'
 import NoPostSelectedMessage from './NoPostSelectedMessage'
 
 export const Post = ({ posts }) => {
-	const { postId } = useParams() // TODO: This ID will need to be pulled from parameters.
+	const { postId } = useParams()
 	const history = useHistory()
 	const post = posts.find((post) => post.id === Number(postId))
 
@@ -13,7 +13,6 @@ export const Post = ({ posts }) => {
 		const result = window.confirm('Are you sure you want to delete this post?')
 		if (result) {
 			await deletePost(id)
-			// TODO: After the post is deleted, send the user to the home page.
 			history.push('/')
 		}
 	}
